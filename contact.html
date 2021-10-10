@@ -1,5 +1,40 @@
-<form action="mailto:test@user.com" method="POST">
-  <input type="" />
+<!DOCTYPE html>
+<html>
 
-  <button type="submit"></button>
-</form>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="pl" />
+  <meta name="Author" content="Dominik Lewandowski" />
+  <title>Kostka Rubika to moje hobby</title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+
+<body class="index_body">
+  <div class="navbar">
+    <ul>
+      <li><a href="index.html">Strona główna</a></li>
+      <li><a href="history.html">Historia</a></li>
+      <li><a href="interesting_facts.html"  >Ciekawostki</a></li>
+      <li><a href="gallery.html"  >Galeria zdjęć</a></li>
+      <li><a href="contact.html"  >Kontakt</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <form action="mailto:test@user.com" method="POST">
+      <label for="email">Adres e-mail:</label>
+      <input type="email" name="email" /><br />
+
+      <label for="subject">Temat:</label>
+      <input type="text" name="subject" /><br />
+
+      <label for="message">Wiadomość:</label>
+      <input type="text" name="message" /><br />
+
+      <button type="submit">Wyślij</button>
+      <button type="reset">Resetuj</button>
+    </form>
+  </div>
+</body>
+
+</html>

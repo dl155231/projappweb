@@ -1,22 +1,32 @@
-.container,
-.container-fluid {
+body {
+  background-image: url('rubiks_cube.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.content {
   width: 100%;
-  padding-right: 0.75rem;
-  padding-left: 0.75rem;
   margin-right: auto;
   margin-left: auto;
 }
+
 .navbar {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
+
 .navbar ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
   background-color: #333;
+}
+
+p {
+  color: white;
+  font-size: 2em;
 }
 
 .navbar li {
@@ -35,29 +45,9 @@
   background-color: #111;
 }
 
-.navbar > .container-fluid {
+.navbar>.content {
   display: flex;
   flex-wrap: inherit;
   align-items: center;
   justify-content: space-between;
-}
-
-iframe {
-  border: 0;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-}
-
-.target {
-  width: 50%;
-  height: 200px;
-  border: solid black 1px;
-}
-.target > div {
-  display: none;
-}
-
-.target > div:target {
-  display: block;
 }
