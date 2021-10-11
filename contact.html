@@ -1,40 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 
 <head>
-  <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="Content-Language" content="pl" />
-  <meta name="Author" content="Dominik Lewandowski" />
+  <meta charset="utf-8">
   <title>Kostka Rubika to moje hobby</title>
-  <link href="style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="index_body">
-  <div class="navbar">
-    <ul>
-      <li><a href="index.html">Strona główna</a></li>
-      <li><a href="history.html">Historia</a></li>
-      <li><a href="interesting_facts.html"  >Ciekawostki</a></li>
-      <li><a href="gallery.html"  >Galeria zdjęć</a></li>
-      <li><a href="contact.html"  >Kontakt</a></li>
-    </ul>
-  </div>
+<body>
+  <table id="layout" width="1200">
+    <tr id="heading">
+      <td colspan="6">
+        <h1>Kostka Rubika - moja pasja</h1>
+      </td>
+    </tr>
+    <tr id="nav">
+      <td><a href="index.html">Strona główna</a></td>
+      <td><a href="history.html">Historia</a></td>
+      <td><a href="interesting_facts.html">Ciekawostki</a></td>
+      <td><a href="gallery.html">Galeria zdjęć</a></td>
+      <td><a href="contact.html">Kontakt</a></td>
+    </tr>
+    <tr id="spacer" height="10">
+      <td>
+      </td>
+    </tr>
+    <tr id="main">
+      <td id="content" colspan="4">
 
-  <div class="content">
-    <form action="mailto:test@user.com" method="POST">
-      <label for="email">Adres e-mail:</label>
-      <input type="email" name="email" /><br />
+        <form action="mailto:test@user.com" method="POST">
 
-      <label for="subject">Temat:</label>
-      <input type="text" name="subject" /><br />
+          <label for="email"><h2>Adres e-mail:</h2></label>
+          <input type="email" name="email" /><br />
 
-      <label for="message">Wiadomość:</label>
-      <input type="text" name="message" /><br />
+          <label for="subject"><h2>Temat:</h2></label>
+          <input type="text" name="subject" /><br />
 
-      <button type="submit">Wyślij</button>
-      <button type="reset">Resetuj</button>
-    </form>
-  </div>
+          <label for="message"><h2>Wiadomość:</h2></label>
+          <input type="text" name="message" style="height: 200px;"/><br /><br />
+
+          <button type="submit">Wyślij</button>
+          <button type="reset">Resetuj</button>
+        </form>
+      </td>
+      <td id="aside">
+        <h2>Dane kontaktowe:</h2>
+        <p>Dominik Lewandowski 155231</p>
+        <p>Inżynieria systemów informatycznych</p>
+        <p>Programowanie aplikacji WWW, gr. 3</p>
+      </td>
+    </tr>
+  </table>
 </body>
 
 </html>
