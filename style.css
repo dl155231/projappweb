@@ -44,6 +44,7 @@ p, li, a {
 }
 
 #aside {
+  position: relative;
   width: 25%;
   vertical-align: top;
   background-color: rgba(128, 215, 255, 0.75);
@@ -53,6 +54,7 @@ p, li, a {
 #aside a {
   text-decoration: none;
 }
+
 #aside a:hover {
   text-decoration: underline;
 }
@@ -72,16 +74,18 @@ p, li, a {
 }
 
 #nav td {
-  padding: 20px;
+  padding: 15px;
 }
 
 #nav a {
   display: block;
+  width: 100%;
   font-size: 2rem;
   text-transform: uppercase;
   text-align: center;
   text-decoration: none;
 }
+
 #nav td:hover {
   background-color: rgb(148, 148, 148);
 }
@@ -122,4 +126,16 @@ button {
 #content li {
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 1.75rem;
+}
+
+#data {
+  display: inline-block;
+  position: absolute;
+  bottom: 10px;
+}
+
+#clock {
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
 }

@@ -5,9 +5,11 @@
   <meta charset="utf-8">
   <title>Kostka Rubika to moje hobby</title>
   <link rel="stylesheet" href="style.css">
+  <script src='timedate.js' type="text/javascript"></script>
+
 </head>
 
-<body>
+<body onload='startClock()'>
   <table id="layout" width="1200">
     <tr id="heading">
       <td colspan="6">
@@ -64,12 +66,28 @@
         <br />
         <b>Krok 7:</b> Obróć narożnik tak, aby pasowały do siebie pod względem kolorystycznym.
         </p>
+
+
       </td>
       <td id="aside">
-
+        <h2>Wybierz kolor tła strony</h2>
+        <form method="post" name="background" onclick="changeBackground()">
+          <input type="button" value="żółty" name="yellow">
+          <input type="button" value="czarny" name="black">
+          <input type="button" value="biały" name="white">
+          <input type="button" value="zielony" name="green">
+          <input type="button" value="niebieski" name="blue">
+          <input type="button" value="pomarańczowy" name="orange">
+          <input type="button" value="szary" name="gray">
+          <input type="button" value="czerwony" name="red">
+        </form>
+        <div id="clock"></div>
+        <div id="data"></div>
       </td>
     </tr>
   </table>
+  <script src='kolorujtlo.js' type="text/javascript"></script>
+
 </body>
 
 </html>
