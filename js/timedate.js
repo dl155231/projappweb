@@ -32,4 +32,3 @@ function showTime() {
     timerID = setTimeout('showTime()', 1000)
     timerRunning = true
 }
-new SimpleLightbox({elements: '.image-gallery img'})

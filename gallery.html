@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8">
   <title>Kostka Rubika to moje hobby</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -28,17 +29,32 @@
     <tr id="main">
       <td id="content" colspan="4">
         <div id="image-gallery">
-        <img src="competition.jpg">
-        <img src="cube_prototype.jpg">
-        <img src="cubes.jpg">
-        <img src="erno_rubik.jpg">
-        <img src="first_competition.jpg">
-        <img src="megaminx.jpg">
-        <img src="najdrozsza.jpg">
-        <img src="najwieksza.jpg">
-        <img src="pyraminx.jpg">
-        <img src="robot.jpg">
-      </div>
+          <img src="competition.jpg"><br />
+          <img src="cube_prototype.jpg"><br />
+          <img src="cubes.jpg"><br />
+          <img src="erno_rubik.jpg"><br />
+          <img src="first_competition.jpg"><br />
+          <img src="megaminx.jpg"><br />
+          <img src="najdrozsza.jpg"><br />
+          <img src="najwieksza.jpg"><br />
+          <img src="pyraminx.jpg"><br />
+          <img src="robot.jpg"><br />
+        </div>
+        <script>
+          $('#image-gallery img').mouseenter(function () {
+            $(this).css("cursor", "pointer");
+            $(this).animate({
+              width: "85%",
+            }, 'slow');
+          });
+
+          $('#image-gallery img').mouseleave(function () {
+            $(this).animate({
+              width: "50%"
+            }, 'slow');
+          });
+        </script>
+        </div>
       </td>
       <td id="aside">
         <ol>
@@ -56,6 +72,7 @@
       </td>
     </tr>
   </table>
+
 </body>
 
 </html>
