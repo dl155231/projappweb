@@ -1,0 +1,47 @@
+<tr id="main">
+  <td id="content" colspan="4">
+    <div id="image-gallery">
+      <img src="img/competition.jpg"><br />
+      <img src="img/cube_prototype.jpg"><br />
+      <img src="img/cubes.jpg"><br />
+      <img src="img/erno_rubik.jpg"><br />
+      <img src="img/first_competition.jpg"><br />
+      <img src="img/megaminx.jpg"><br />
+      <img src="img/najdrozsza.jpg"><br />
+      <img src="img/najwieksza.jpg"><br />
+      <img src="img/pyraminx.jpg"><br />
+      <img src="img/robot.jpg"><br />
+    </div>
+    <script>
+      $('#image-gallery img').mouseenter(function () {
+        $(this).css("cursor", "pointer");
+        $(this).animate({
+          width: "85%",
+        }, 'slow');
+      });
+
+      $('#image-gallery img').mouseleave(function () {
+        $(this).animate({
+          width: "50%"
+        }, 'slow');
+      });
+    </script>
+    </div>
+  </td>
+  <td id="aside">
+    <ol>
+      <li>Współczesne zawody</li>
+      <li>Drewniany prototyp kostki</li>
+      <li>Różne rozmiary kostek</li>
+      <li>Erno Rubik</li>
+      <li>Pierwsze Mistrzostwa Świata</li>
+      <li>Kostka typu megaminx</li>
+      <li>Najdroższa kostka na świecie</li>
+      <li>Tony Fisher z rekordową kostką</li>
+      <li>Kostka typu pyraminx</li>
+      <li>Najszybszy układacz na świecie - robot Sub1</li>
+    </ol>
+    <div id="clock"></div>
+    <div id="data"></div>
+  </td>
+</tr>
