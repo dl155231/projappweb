@@ -1,4 +1,5 @@
-<?php include('cfg.php'); ?>
+<?php include('cfg.php');
+include('showpage.php'); ?>
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -6,6 +7,7 @@
   <meta charset="utf-8">
   <title>Kostka Rubika to moje hobby</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="js/jquery-3.6.0.min.js"></script>
   <script src='js/timedate.js' type="text/javascript"></script>
 
 </head>
@@ -26,14 +28,24 @@
       <td>
       </td>
     </tr>
-    7
     <?php
-    if ($_GET['page'] == '') $strona = 'html/index.html';
-    if ($_GET['page'] == 'contact') $strona = 'html/contact.html';
-    if ($_GET['page'] == 'history') $strona = 'html/history.html';
-    if ($_GET['page'] == 'gallery') $strona = 'html/gallery.html';
-    if ($_GET['page'] == 'facts') $strona = 'html/interesting_facts.html';
-    include($strona);
+    switch ($_GET['page']) {
+      case '':
+        showSubpage(1);
+        break;
+      case 'history':
+        showSubpage(2);
+        break;
+      case 'facts':
+        showSubpage(3);
+        break;
+      case 'gallery':
+        showSubpage(4);
+        break;
+      case 'contact':
+        showSubpage(5);
+        break;
+    }
     ?>
 
 
