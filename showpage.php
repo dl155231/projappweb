@@ -1,6 +1,6 @@
 <?php
-if (!$link) echo '<b> Przerwane polaczenie</b>';
-function showSubpage($id)
+if (!$connection) echo '<b> Przerwane polaczenie</b>';
+function showPage($id)
 {
     $dbhost = 'localhost';
     $dbuser = 'root';
@@ -18,4 +18,4 @@ function showSubpage($id)
     };
 
     echo $row['page_content'];
-}
+} ?>

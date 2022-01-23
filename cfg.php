@@ -2,8 +2,9 @@
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
-$baza = 'moja_strona';
+$db = 'moja_strona';
 
-$link =  mysqli_connect($dbhost, $dbuser, $dbpass, $baza);
-if (!$link) echo '<b> Przerwane polaczenie</b>';
+$connection =  mysqli_connect($dbhost, $dbuser, $dbpass);
+if (!$connection) echo '<b>Błąd podczas łączenia serwerem bazy danych.</b>';
+if (!mysqli_select_db($connection, $db)) echo '<b>Błąd podczas łączenia z bazą danych.</b>';
 ?>

@@ -1,0 +1,9 @@
+body {
+  background-image: url('../img/rubiks_cube.webp');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+#content {
+  background-color: rgba(255,255,255,0.75);
+}
