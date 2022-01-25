@@ -26,7 +26,7 @@ function SubpageList($dblink)
                     </td>
                     </tr>
                     <tr>
-                        <td colspan="3"><hr></hr></td>
+                        <td colspan="3"><hr></td>
                     </tr>
                 ';
         }
@@ -34,7 +34,7 @@ function SubpageList($dblink)
         echo '</div>';
     } else echo "Funkcjonalność dostępna wyłącznie po zalogowaniu";
 }
-function Zaloguj($login, $password, $admin_login, $admin_passwd)
+function Login($login, $password, $admin_login, $admin_passwd)
 {
     if ($login and $password) {
         if (($login == $admin_login) && (md5($password) == md5($admin_passwd))) {
@@ -46,13 +46,14 @@ function Zaloguj($login, $password, $admin_login, $admin_passwd)
         return 0;
 }
 
-function EdytujPodstrone($id)
+function PageEdit($id)
 {
     $id_clear = htmlspecialchars($id);
     $_SESSION['id'] = $id_clear;
     header('Location: page_edit.php');
 }
-function UsunPodstrone($id, $dblink)
+
+function PageDelete($id, $dblink)
 {
     $id_clear = htmlspecialchars($id);
 
@@ -98,12 +99,12 @@ function CategoryList($dblink)
                             <a class="btn btn-danger" href="panel.php?id_delete_category=' . $rowMother['id'] . '">Usuń</a>
                         </td>
                     </tr>
-                    <tr><td colspan="3"><hr></hr></td></tr>
+                    <tr><td colspan="3"><hr></td></tr>
                 ';
             $mother = $rowMother['name'];
             $querySubCategories = "SELECT * FROM categories WHERE mother='$mother' LIMIT 100";
             $resultSubCategories = mysqli_query($dblink, $querySubCategories);
-            echo '<tr><td></td>';
+            echo '<tr> <td></td>';
             echo '<td colspan="3">';
             echo '<table>';
             while ($rowSubCategories = mysqli_fetch_array($resultSubCategories)) {
@@ -115,41 +116,55 @@ function CategoryList($dblink)
                         <a class="btn btn-danger" href="panel.php?id_delete_category=' . $rowSubCategories['id'] . '">Usuń</a>
                     </td>
                     </tr>
-                    <tr><td colspan="2"><hr></hr></td></tr>
+                    <tr><td colspan="2"><hr></td></tr>
                     ';
             }
-            echo '</td>';
-            echo '</tr>';
-            echo '</table>';
+            echo '</td>
+                </tr>
+            </table>';
+        }
+        echo '</table></div>';
+    } else echo "Funkcjonalność dostępna wyłącznie po zalogowaniu";
+}
+
+function ProductList($dblink)
+{
+    if (isset($_SESSION)) {
+
+        $query = "SELECT * FROM products LIMIT 100";
+        $result = mysqli_query($dblink, $query);
+        echo '<div class="page-list">';
+        echo '<table>';
+        echo '<tr>
+                <th>ID</th>
+                <th>Nazwa</th>
+                <th>Kategoria</th>
+                <th>Cena</th>
+                <th>Dostępne sztuki</th>
+                <th>Edycja</th>
+            </tr>';
+
+        while ($row = mysqli_fetch_array($result)) {
+            echo '
+                    <tr>
+                    <td class="list-id">' . $row['id'] . '</td>
+                    <td>' . $row['name'] . '</td><td>' . $row['category'] . '</td>
+                    <td>' . $row['price'] . '</td><td>' . $row['amount'] . '</td>
+                    <td>
+                        <a class="btn btn-primary" href="product_panel.php?id_product_edit=' . $row['id'] . '">Edytuj</a>
+                        <a class="btn btn-danger" href="product_panel.php?id_product_delete=' . $row['id'] . '">Usuń</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6"><hr></td>
+                </tr>';
         }
         echo '</table>';
         echo '</div>';
     } else echo "Funkcjonalność dostępna wyłącznie po zalogowaniu";
 }
 
-function ListaProdukty($dblink)
-{
-    if (isset($_SESSION)) {
-
-        $query = "SELECT * FROM products LIMIT 100";
-        $result = mysqli_query($dblink, $query);
-
-        echo '<table class="page-list">';
-        echo '<tr><th>ID</th><th>NAZWA</th><th>KATEGORIA</th><th>CENA NETTO</th><th>ILOŚĆ DOSTĘPNYCH SZTUK</th></tr>';
-        while ($row = mysqli_fetch_array($result)) {
-            echo '
-                    <tr><td class="list-id">' . $row['id'] . '</td><td>' . $row['nazwa'] . '</td><td>' . $row['kategoria'] . '</td>
-                    <td>' . $row['cena_netto'] . '</td><td>' . $row['ilosc_sztuk'] . '</td>
-                    <td><a class="edit" href="product_panel.php?id_product=' . $row['id'] . '">Edytuj</a></td>
-                    <td><a class="delete" href="product_panel.php?id_delete_product=' . $row['id'] . '">Usuń</a></td>
-                    <tr><td colspan="7"><hr></hr></td></tr>
-                ';
-        }
-        echo '</table>';
-    } else echo "Funkcjonalność dostępna wyłącznie po zalogowaniu";
-}
-
-function UsunKategorie($id, $dblink)
+function CategoryDelete($id, $dblink)
 {
     $id_clear = htmlspecialchars($id);
 
@@ -175,21 +190,21 @@ function UsunKategorie($id, $dblink)
     }
 }
 
-function EdytujKategorie($id)
+function CategoryEdit($id)
 {
     $id_clear = htmlspecialchars($id);
     $_SESSION['id_category_edit'] = $id_clear;
     header('Location: category_edit.php');
 }
 
-function EdytujProdukt($id)
+function ProductEdit($id)
 {
     $id_clear = htmlspecialchars($id);
-    $_SESSION['id_product'] = $id_clear;
-    header('Location: edit_product.php');
+    $_SESSION['id_product_edit'] = $id_clear;
+    header('Location: product_edit.php');
 }
 
-function UsunProdukt($id, $dblink)
+function ProductDelete($id, $dblink)
 {
     $id_clear = htmlspecialchars($id);
 
@@ -208,21 +223,21 @@ function UsunProdukt($id, $dblink)
 }
 
 if (isset($_GET['id'])) {
-    EdytujPodstrone($_GET['id'], $dblink);
+    PageEdit($_GET['id'], $dblink);
 }
 if (isset($_GET['id_delete'])) {
-    UsunPodstrone($_GET['id_delete'], $dblink);
+    PageDelete($_GET['id_delete'], $dblink);
 }
 if (isset($_GET['id_category_edit'])) {
-    EdytujKategorie($_GET['id_category_edit'], $dblink);
+    CategoryEdit($_GET['id_category_edit'], $dblink);
 }
 if (isset($_GET['id_delete_category'])) {
-    UsunKategorie($_GET['id_delete_category'], $dblink);
+    CategoryDelete($_GET['id_delete_category'], $dblink);
 }
-if (isset($_GET['id_product'])) {
-    EdytujProdukt($_GET['id_product'], $dblink);
+if (isset($_GET['id_product_edit'])) {
+    ProductEdit($_GET['id_product_edit'], $dblink);
 }
-if (isset($_GET['id_delete_product'])) {
-    UsunProdukt($_GET['id_delete_product'], $dblink);
+if (isset($_GET['id_product_delete'])) {
+    ProductDelete($_GET['id_product_delete'], $dblink);
 }
 ?>

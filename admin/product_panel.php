@@ -18,41 +18,24 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>Panel Sklepu</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Kostka Rubika to moje hobby</title>
+
+  <link rel="stylesheet" type="text/css" href="/www/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/www/css/custom.css">
+
+  <script src="/www/js/bootstrap.bundle.min.js"></script>
+  <script src="/www/js/jquery-3.6.0.min.js"></script>
+  <script src="/www/js/custom.js"></script>
+
 </head>
+
 <body>
-    <header>
-        <div class="menu">          
-            <?php
-                if($_GET['page']!="Home"){
-                    echo '
-                    <a href="panel.php?page=Home">Home</a>
-                    ';
-                }
-                echo '
-                    <a href="panel.php">Panel panel</a>
-                    <a href="panel.php">Panel Kategorii</a>
-                    ';
-            ?>
-            <a href ="#" id="data"></a>
-		    <a href ="#" id="time"></a>
-		    <script src="../js/timedate.js" type="text/javascript"></script>
-
+  <?php include('../navbar.php'); ?>
+  <div class="container" id="content">          
             
-            <?php
 
-            if(isset($_SESSION['login'])){
-                echo '<div class="right-menu-item"><a href="panel.php?page=wyloguj">Wyloguj</a></div>';
-            }
-            else {
-                echo '<div class="right-menu-item"><a href="panel.php?page=zaloguj">Zaloguj</a></div>';
-            }
-            
-            ?>
-
-        </div>
-    </header>
 
     <section>
         <div class="content">
@@ -63,12 +46,12 @@
 
                     echo 'Zalogowano jako użytkownik: '.$_SESSION['login'];
                     echo '
-                    <form method="post" name="CreateForm" enctype="multipart/form-data" action="create_product.php">
-                        <input style="margin-top: 20px;" type="submit" name="create" value="Dodaj nowy produkt" />
+                    <form method="post" name="CreateForm" enctype="multipart/form-data" action="product_create.php">
+                        <input class="btn btn-primary" type="submit" name="create" value="Dodaj nowy produkt" />
                     </form>
                     ';
                     echo '<h3 style="margin: 20px auto;">Lista dostępnych produktów:</h3>';
-                    ListaProdukty($dblink);
+                    ProductList($dblink);
                     
                 ?>
             </div>
@@ -87,7 +70,7 @@
                     header('Location: wyloguj.php');
                     exit();
                 }
-                if($_GET['page'] == 'Główna'){
+                if($_GET['page'] == 'Home'){
                     header('Location: ../index.php');
                     exit();
                 }
@@ -97,5 +80,4 @@
 
 
 </body>
-<script src="../js/onloadfunctionspanel.js" type="text/javascript"></script>
 </html>

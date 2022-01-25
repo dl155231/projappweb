@@ -44,19 +44,18 @@
          <?php
           if (isset($_SESSION['login'])) {
             echo '<li class="nav-item">
-           <a class="nav-link" href="?page=Panel">Panel</a>
-         </li>';
-          }
-          ?>
-         <li class="nav-item">
-           <?php
-            if (isset($_SESSION['login']))
-              echo '<a class="nav-link" href="?page=Wyloguj">Wyloguj</a>';
-            else
-              echo '<a class="nav-link" href="?page=Zaloguj">Zaloguj</a>';
+                    <a class="nav-link" href="/www/admin/panel.php">Panel zarządzania</a>
+                  </li>';
+            echo '<li class="nav-item">
+                    <a class="nav-link" href="/www/admin/product_panel.php">Panel produktów</a>
+                  </li>';
+            echo '<li class="nav-item">
+                    <a class="nav-link" href="/www/?page=Wyloguj">Wyloguj</a>
+                  </li>';
+          } else
+            echo '<li class="nav-item"><a class="nav-link" href="?page=Zaloguj">Zaloguj</a></li>';
 
-            ?>
-         </li>
+          ?>
          <li class="nav-item">
            <span class="nav-link disabled" id="date"></span>
          </li>

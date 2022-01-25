@@ -57,7 +57,7 @@ if (!isset($_GET['page'])) {
     ?>
     <div class="container" id="content">
         <div>
-            <h2><span>Panel</span></h2>
+            <h2><span>Panel CMS</span></h2>
             <?php
 
             echo 'Zalogowano jako użytkownik: ' . $_SESSION['login'];

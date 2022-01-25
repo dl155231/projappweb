@@ -61,7 +61,7 @@
         //     7.4. Wyświetlenie błędu      //
         //----------------------------------//
 
-        // Za utworzenie zmiennej sesji zawierającej komunikat o błędzie logowania odpowiada funkcja 'Zaloguj()'
+        // Za utworzenie zmiennej sesji zawierającej komunikat o błędzie logowania odpowiada funkcja 'Login()'
         // z pliku admin/admin.php. Warunek jedynie wyświetla wiadomość o błędzie logowania jeżeli takowa istnieje.
 
         if(isset($_SESSION['error']))

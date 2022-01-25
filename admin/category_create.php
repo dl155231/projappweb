@@ -12,7 +12,7 @@
     
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/styles.css">
@@ -35,7 +35,7 @@
                 <table>
                 <form id="createform" method="post" name="EditForm" enctype="multipart/form-data" action="">
                     <tr><td>Nazwa kategorii: </td><td><input type="text" name="name" value="nazwa kategorii"/></td></tr>
-                    <tr><td>Kategoria-Matka: </td>
+                    <tr><td>Nadkategoria: </td>
                     <td>
                     <select id="mother-categories" name="motherlist" form="createform">
                         <option value="">Brak</option>
