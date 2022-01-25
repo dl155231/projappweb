@@ -36,7 +36,7 @@ function PrzypomnijHaslo()
 {
     echo '
         <script type="text/javascript">
-            window.alert("Wiadomość Zawierająca hasło do panelu CMS została wysłana na e-mail administratora")
+            window.alert("Wiadomość Zawierająca hasło do panelu panel została wysłana na e-mail administratora")
         </script>
         ';
 }

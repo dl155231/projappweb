@@ -11,7 +11,7 @@ if (!isset($_SESSION['login'])) {
 }
 
 if (!isset($_GET['page'])) {
-    $_GET['page'] = 'CMS';
+    $_GET['page'] = 'panel';
 }
 ?>
 <!DOCTYPE html>
@@ -27,11 +27,11 @@ if (!isset($_GET['page'])) {
 <body>
 
 
+    <?php
+    include '../navbar.php';
+    ?>
     <div class="container" id="content">
 
-        <?php
-        include '../html/navbar.php';
-        ?>
 
         <div class="content">
 
@@ -41,19 +41,19 @@ if (!isset($_GET['page'])) {
 
                 echo 'Zalogowano jako użytkownik: ' . $_SESSION['login'];
                 echo '
-                    <form method="post" name="CreateForm" enctype="multipart/form-data" action="category_create.php">
+                    <form method="post" name="CategoryCreateForm" enctype="multipart/form-data" action="category_create.php">
                         <input class="btn btn-primary my-2" type="submit" name="create" value="Dodaj nową kategorię" />
                     </form>
                     ';
                 echo '<h3>Lista dostępnych kategorii głównych i podkategorii:</h3>';
-                ListaKategorie($dblink);
+                CategoryList($dblink);
 
                 ?>
             </div>
 
             <?php
             //---------------------------------------//
-            //     2.4. Nawigacja poza panel CMS     //
+            //     2.4. Nawigacja poza panel panel     //
             //---------------------------------------//
 
             // Pierwszy warunek zprawdza czy istnieje zmienna page o wartości 'wyloguj', jeżeli tak, to użytkownik zostaje przekierowany

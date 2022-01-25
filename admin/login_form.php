@@ -5,7 +5,7 @@
     //-----------------------------//
 
     //--------------------------------------------------------------------//
-    //     7.1. Plik login_form.php - Formularz logowania do panelu CMS     //
+    //     7.1. Plik login_form.php - Formularz logowania do panelu panel     //
     //--------------------------------------------------------------------//
 
     // Należy wspomnieć, że pomimo lokalizacji pliku 'login_form.php' w folderze admin, to zawartość
@@ -47,7 +47,7 @@
         // Po naciśnięciu przycisku 'Zaloguj', użytkownik zostaje przekierowany do strony admin/login.php
 
      -->
-    <h1 class ="heading">Panel CMS</h1>
+    <h1 class ="heading">Panel panel</h1>
     <form method="post" name="LoginForm" enctype="multipart/form-data" action="admin/login.php">
         <table>
             <tr><td class="log4_t">[email]</td><td><input type="text" name="login_email" /></td></tr>

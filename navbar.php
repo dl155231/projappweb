@@ -1,9 +1,9 @@
  <script src="/www/js/timedate.js">
  </script>
  <script>
-      $(document).ready(() => {
-        startClock();
-      })
+   $(document).ready(() => {
+     startClock();
+   })
  </script>
  <nav class="navbar navbar-expand-lg navbar-light bg-light mx-auto">
    <div class="container-fluid">
@@ -17,7 +17,6 @@
            <a class="nav-link" href="/www/index.php">Home</a>
          </li>
          <?php
-          $currentPage = $_GET['page'];
           $query = "SELECT * FROM page_list ORDER BY id ASC LIMIT 10";
           $result = mysqli_query($dblink, $query);
           while ($row = mysqli_fetch_array($result)) {
@@ -25,7 +24,7 @@
               if ($row['page_title'] != 'Home') {
                 $title = $row['page_title'];
                 $el = "<li class='nav-item'>
-            <a class='nav-link' href='?page={$title}'>$title</a>
+            <a class='nav-link' href='/www/index.php?page={$title}'>$title</a>
           </li>";
                 echo $el;
               }
@@ -42,9 +41,13 @@
          <li class="nav-item">
            <a class="nav-link" href="/www/index.php?page=Koszyk">Koszyk</a>
          </li>
-         <li class="nav-item">
-           <a class="nav-link" href="?page=cms">CMS</a>
-         </li>
+         <?php
+          if (isset($_SESSION['login'])) {
+            echo '<li class="nav-item">
+           <a class="nav-link" href="?page=Panel">Panel</a>
+         </li>';
+          }
+          ?>
          <li class="nav-item">
            <?php
             if (isset($_SESSION['login']))

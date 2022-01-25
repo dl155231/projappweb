@@ -1,3 +1,4 @@
+
 <?php
 
 if (!isset($_SESSION['login']))
@@ -5,23 +6,32 @@ if (!isset($_SESSION['login']))
 
 include '../cfg.php';
 
-function ListaPodstron($dblink)
+function SubpageList($dblink)
 {
     if (isset($_SESSION)) {
 
         $query = "SELECT * FROM page_list ORDER BY id ASC LIMIT 100";
         $result = mysqli_query($dblink, $query);
+        echo '<div class="page-list">';
+        echo '<table>';
+        echo '<tr><th>ID</th><th>Nazwa</th><th>Edycja</th></tr>';
 
-        echo '<table class="page-list">';
         while ($row = mysqli_fetch_array($result)) {
-            echo '
-                    <tr><td class="list-id">' . $row['id'] . '</td><td>' . $row['page_title'] . '
-                    <td><a class="edit" href="CMS.php?id=' . $row['id'] . '">Edytuj</a></td>
-                    <td><a class="delete" href="CMS.php?id_delete=' . $row['id'] . '">Usuń</a></td>
-                    <tr><td colspan="4"><hr></hr></td></tr>
+            echo '<tr>
+                    <td>' . $row['id'] . '</td>
+                    <td>' . $row['page_title'] . '</td>
+                    <td>
+                        <a class="btn btn-primary ms-auto" href="panel.php?id=' . $row['id'] . '">Edytuj</a>
+                        <a class="btn btn-danger" href="panel.php?id_delete=' . $row['id'] . '">Usuń</a>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><hr></hr></td>
+                    </tr>
                 ';
         }
         echo '</table>';
+        echo '</div>';
     } else echo "Funkcjonalność dostępna wyłącznie po zalogowaniu";
 }
 function Zaloguj($login, $password, $admin_login, $admin_passwd)
@@ -68,37 +78,44 @@ function UsunPodstrone($id, $dblink)
     }
 }
 
-function ListaKategorie($dblink)
+function CategoryList($dblink)
 {
     if (isset($_SESSION)) {
 
-        $queryMother = "SELECT * FROM categories WHERE category_mother IS NULL LIMIT 100";
-        $resultMother = mysqli_query($dblink, $queryMother);
+        $queryMother = "SELECT * FROM categories WHERE mother IS NULL LIMIT 100";
+        $resultMother = mysqli_query($dblink, $queryMother) or die(mysqli_error($dblink));
+        echo '<div class="page-list">';
+        echo '<table>';
+        echo '<tr><th>ID</th><th>Nazwa</th><th>Edycja</th></tr>';
 
-        echo '<table class="category-list">';
         while ($rowMother = mysqli_fetch_array($resultMother)) {
             echo '
                     <tr>
-                    <td>' . $rowMother['category_name'] . '</td>
-                    <td><a class="edit" href="shop_panel.php?id_category=' . $rowMother['id'] . '">Edytuj</a></td>
-                    <td><a class="delete" href="shop_panel.php?id_delete_category=' . $rowMother['id'] . '">Usuń</a></td>
+                        <td>' . $rowMother['id'] . '</td>
+                        <td>' . $rowMother['name'] . '</td>
+                        <td>
+                            <a class="btn btn-primary" href="panel.php?id_category_edit=' . $rowMother['id'] . '">Edytuj</a>
+                            <a class="btn btn-danger" href="panel.php?id_delete_category=' . $rowMother['id'] . '">Usuń</a>
+                        </td>
                     </tr>
                     <tr><td colspan="3"><hr></hr></td></tr>
                 ';
-            $mother = $rowMother['category_name'];
-            $querySubCategories = "SELECT * FROM categories WHERE category_mother='$mother' LIMIT 100";
+            $mother = $rowMother['name'];
+            $querySubCategories = "SELECT * FROM categories WHERE mother='$mother' LIMIT 100";
             $resultSubCategories = mysqli_query($dblink, $querySubCategories);
             echo '<tr><td></td>';
             echo '<td colspan="3">';
-            echo '<table class="category-list">';
+            echo '<table>';
             while ($rowSubCategories = mysqli_fetch_array($resultSubCategories)) {
                 echo '
                     <tr>
-                    <td>' . $rowSubCategories['category_name'] . '
-                    <td><a class="edit" href="shop_panel.php?id_category=' . $rowSubCategories['id'] . '">Edytuj</a></td>
-                    <td><a class="delete" href="shop_panel.php?id_delete_category=' . $rowSubCategories['id'] . '">Usuń</a></td>
+                    <td>' . $rowSubCategories['name'] . '
+                    <td>
+                        <a class="btn btn-primary" href="category_edit.php?id_category_edit=' . $rowSubCategories['id'] . '">Edytuj</a>
+                        <a class="btn btn-danger" href="panel.php?id_delete_category=' . $rowSubCategories['id'] . '">Usuń</a>
+                    </td>
                     </tr>
-                    <tr><td colspan="3"><hr></hr></td></tr>
+                    <tr><td colspan="2"><hr></hr></td></tr>
                     ';
             }
             echo '</td>';
@@ -106,6 +123,7 @@ function ListaKategorie($dblink)
             echo '</table>';
         }
         echo '</table>';
+        echo '</div>';
     } else echo "Funkcjonalność dostępna wyłącznie po zalogowaniu";
 }
 
@@ -160,8 +178,8 @@ function UsunKategorie($id, $dblink)
 function EdytujKategorie($id)
 {
     $id_clear = htmlspecialchars($id);
-    $_SESSION['id_category'] = $id_clear;
-    header('Location: edit_category.php');
+    $_SESSION['id_category_edit'] = $id_clear;
+    header('Location: category_edit.php');
 }
 
 function EdytujProdukt($id)
@@ -195,8 +213,8 @@ if (isset($_GET['id'])) {
 if (isset($_GET['id_delete'])) {
     UsunPodstrone($_GET['id_delete'], $dblink);
 }
-if (isset($_GET['id_category'])) {
-    EdytujKategorie($_GET['id_category'], $dblink);
+if (isset($_GET['id_category_edit'])) {
+    EdytujKategorie($_GET['id_category_edit'], $dblink);
 }
 if (isset($_GET['id_delete_category'])) {
     UsunKategorie($_GET['id_delete_category'], $dblink);
@@ -208,6 +226,3 @@ if (isset($_GET['id_delete_product'])) {
     UsunProdukt($_GET['id_delete_product'], $dblink);
 }
 ?>
-</body>
-
-</html>

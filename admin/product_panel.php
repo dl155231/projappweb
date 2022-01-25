@@ -11,7 +11,7 @@
     }
 
     if(!isset($_GET['page'])){
-        $_GET['page']='CMS'; 
+        $_GET['page']='panel'; 
     }
 ?>
 
@@ -27,12 +27,12 @@
             <?php
                 if($_GET['page']!="Home"){
                     echo '
-                    <a href="CMS.php?page=Home">Home</a>
+                    <a href="panel.php?page=Home">Home</a>
                     ';
                 }
                 echo '
-                    <a href="CMS.php">Panel CMS</a>
-                    <a href="shop_panel.php">Panel Kategorii</a>
+                    <a href="panel.php">Panel panel</a>
+                    <a href="panel.php">Panel Kategorii</a>
                     ';
             ?>
             <a href ="#" id="data"></a>
@@ -43,10 +43,10 @@
             <?php
 
             if(isset($_SESSION['login'])){
-                echo '<div class="right-menu-item"><a href="CMS.php?page=wyloguj">Wyloguj</a></div>';
+                echo '<div class="right-menu-item"><a href="panel.php?page=wyloguj">Wyloguj</a></div>';
             }
             else {
-                echo '<div class="right-menu-item"><a href="CMS.php?page=zaloguj">Zaloguj</a></div>';
+                echo '<div class="right-menu-item"><a href="panel.php?page=zaloguj">Zaloguj</a></div>';
             }
             
             ?>
@@ -57,7 +57,7 @@
     <section>
         <div class="content">
 
-            <div class="cms-window">
+            <div class="panel-window">
                 <h2><span>Panel Produktów</span></h2>
                 <?php
 
@@ -75,7 +75,7 @@
 
             <?php
                 //---------------------------------------//
-                //     2.4. Nawigacja poza panel CMS     //
+                //     2.4. Nawigacja poza panel panel     //
                 //---------------------------------------//
 
                 // Pierwszy warunek zprawdza czy istnieje zmienna page o wartości 'wyloguj', jeżeli tak, to użytkownik zostaje przekierowany
@@ -97,5 +97,5 @@
 
 
 </body>
-<script src="../js/onloadfunctionsCMS.js" type="text/javascript"></script>
+<script src="../js/onloadfunctionspanel.js" type="text/javascript"></script>
 </html>

@@ -5,5 +5,49 @@ body {
 }
 
 #content {
-  background-color: rgba(255,255,255,0.75);
+  background-color: rgba(255,255,255, 0.75);
+}
+
+#image-gallery {
+  text-align: center;
+}
+
+#image-gallery img {
+  width: 500px;
+  height: auto;
+}
+
+.page-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.page-list table {
+  width: 75%;
+}
+
+.page-list td {
+  text-align: left;
+}
+
+.page-list tr td:last-child {
+  text-align: right;
+}
+
+.page-list tr th:last-child {
+  text-align: right;
+}
+
+
+.btn-custom {
+  background-color: #f5f5f5;
+  border: 1px solid #f5f5f5;
+  color: #000;
+  font-size: 1.25em;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  border-radius: 5px;
 }

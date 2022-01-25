@@ -41,6 +41,7 @@ if (!isset($_GET['page'])) {
 
   <script src="/www/js/bootstrap.bundle.min.js"></script>
   <script src="/www/js/jquery-3.6.0.min.js"></script>
+  <script src="/www/js/custom.js"></script>
 
 </head>
 
@@ -85,9 +86,9 @@ if (!isset($_GET['page'])) {
       case 'Koszyk':
         include 'shop/cart.php';
         break;
-      case 'cms':
+      case 'Panel':
         if (isset($_SESSION['login'])) {
-          header('Location: admin/cms.php');
+          header('Location: admin/panel.php');
           exit();
           break;
         }
@@ -98,21 +99,16 @@ if (!isset($_GET['page'])) {
         break;
     }
     ?>
+    <?php
+    $nr_indeksu = 155231;
+    $nrGrupy = '3';
+    echo 'Autor: Dominik Lewandowski ' . $nr_indeksu . ' grupa ' . $nrGrupy;
+    ?>
   </div>
 
 
 
   <script src="js/kolorujtlo.js" type="text/javascript"></script>
-  <script>
-    $(document).ready(() => {
-      startClock();
-    })
-  </script>
-  <?php
-  $nr_indeksu = 155231;
-  $nrGrupy = '3';
-  echo 'Autor: Dominik Lewandowski ' . $nr_indeksu . ' grupa ' . $nrGrupy;
-  ?>
 </body>
 
 

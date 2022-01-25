@@ -14,9 +14,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/custom.css">
-    <title>Panel CMS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Edytuj podstronę</title>
+
+  <link rel="stylesheet" type="text/css" href="/www/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/www/css/custom.css">
+
+  <script src="/www/js/bootstrap.bundle.min.js"></script>
+  <script src="/www/js/jquery-3.6.0.min.js"></script>
+  <script src="/www/js/custom.js"></script>
+
 </head>
 <body>
     <div class="edit-content">
@@ -25,7 +33,7 @@
 
                 if(isset($_POST["cancel"])){
                     unset($_SESSION['id']);
-                    header('Location: CMS.php');
+                    header('Location: panel.php');
                     exit();
                 }
 
@@ -66,6 +74,7 @@
                             $status = 0;
                         }
                         $query_update="UPDATE page_list SET page_title='$new_title', page_content='$new_content', status=$status WHERE id=$id LIMIT 1";
+                        $result_update = mysqli_query($dblink, $query_update) or die(mysqli_error($dblink));
                         if($page_info = mysqli_query($dblink, $query_update)){
                             echo '
                             <script type="text/javascript">

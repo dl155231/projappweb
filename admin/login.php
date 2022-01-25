@@ -14,6 +14,6 @@ if (Zaloguj($login, $passwd, $admin_login, $admin_passwd) == 0) {
 } else {
     $_SESSION['login'] = $login;
     unset($_SESSION['error']);
-    header('Location: CMS.php');
+    header('Location: panel.php');
 }
 ?>
