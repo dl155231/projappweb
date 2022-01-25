@@ -1,6 +1,6 @@
 <h2>Kontakt</h2>
 <?php
-if (!isset($_SESSION['login'])) {
+if (!isset($_SESSION['logged_in'])) {
     echo '
         <form method="post" name="LoginForm" enctype="multipart/form-data" action="">
                 <button id="pass-remind" class="btn btn-primary" type="submit" name="password-remind">test</button>

@@ -5,7 +5,7 @@
     include 'admin.php';
     include '../cfg.php';
 
-    if (!isset($_SESSION['login'])){
+    if (!isset($_SESSION['logged_in'])){
         header('Location: ../index.php?page=zaloguj');
         exit();
     }
@@ -44,7 +44,7 @@
                 <h2><span>Panel Produktów</span></h2>
                 <?php
 
-                    echo 'Zalogowano jako użytkownik: '.$_SESSION['login'];
+                    echo 'Zalogowano jako użytkownik: '.$_SESSION['logged_in'];
                     echo '
                     <form method="post" name="CreateForm" enctype="multipart/form-data" action="product_create.php">
                         <input class="btn btn-primary" type="submit" name="create" value="Dodaj nowy produkt" />

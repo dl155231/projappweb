@@ -42,7 +42,7 @@
            <a class="nav-link" href="/www/index.php?page=Koszyk">Koszyk</a>
          </li>
          <?php
-          if (isset($_SESSION['login'])) {
+          if (isset($_SESSION['logged_in'])) {
             echo '<li class="nav-item">
                     <a class="nav-link" href="/www/admin/panel.php">Panel zarządzania</a>
                   </li>';

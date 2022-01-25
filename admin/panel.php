@@ -24,7 +24,7 @@ include '../cfg.php';
 // na przykład kiedy użytkownik postanowi wpisać ręcznie adres strony 'panel.php' bez wcześniejszego
 // zalogowania się to warunek przekieruje użytkownika do formularza logowania.
 
-if (!isset($_SESSION['login'])) {
+if (!isset($_SESSION['logged_in'])) {
     header('Location: ../index.php?page=zaloguj');
     exit();
 }
@@ -60,7 +60,7 @@ if (!isset($_GET['page'])) {
             <h2><span>Panel CMS</span></h2>
             <?php
 
-            echo 'Zalogowano jako użytkownik: ' . $_SESSION['login'];
+            echo 'Zalogowano jako użytkownik: ' . $_SESSION['logged_in'];
             echo '
                     <form method="post" name="CreateForm" enctype="multipart/form-data" action="page_create.php">
                         <input class="btn btn-success mt-2" type="submit" name="create" value="Dodaj nową stronę" />

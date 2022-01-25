@@ -12,7 +12,7 @@ if (Login($login, $passwd, $admin_login, $admin_passwd) == 0) {
     $_SESSION['error'] = 'Wystąpił błąd podczas logowania';
     header('Location: login_form.php');
 } else {
-    $_SESSION['login'] = $login;
+    $_SESSION['logged_in'] = $login;
     unset($_SESSION['error']);
     header('Location: panel.php');
 }

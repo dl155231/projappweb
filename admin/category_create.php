@@ -5,7 +5,7 @@
     include 'admin.php';
     include '../cfg.php';
 
-    if (!isset($_SESSION['login'])){
+    if (!isset($_SESSION['logged_in'])){
         header('Location: ../index.php?idp=zaloguj');
         exit();
     }

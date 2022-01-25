@@ -87,7 +87,7 @@ if (!isset($_GET['page'])) {
         include 'shop/cart.php';
         break;
       case 'Panel':
-        if (isset($_SESSION['login'])) {
+        if (isset($_SESSION['logged_in'])) {
           header('Location: admin/panel.php');
           exit();
           break;

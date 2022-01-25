@@ -23,7 +23,7 @@ include '../cfg.php';
 // na przykład kiedy użytkownik postanowi wpisać ręcznie adres strony 'create.php' bez wcześniejszego
 // zalogowania się to warunek przekieruje użytkownika do formularza logowania.
 
-if (!isset($_SESSION['login'])) {
+if (!isset($_SESSION['logged_in'])) {
     header('Location: ../index.php?page=zaloguj');
     exit();
 }

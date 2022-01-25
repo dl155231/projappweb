@@ -25,13 +25,13 @@
 
     if(!isset($_SESSION)){
         session_start();
-        if(isset($_SESSION['login'])){
+        if(isset($_SESSION['logged_in'])){
             header('Location: ../index.php?page=zaloguj');
             exit();
         }
     }
 
-    if(isset($_SESSION['login'])){
+    if(isset($_SESSION['logged_in'])){
         header('Location: index.php');
         exit();
     }
