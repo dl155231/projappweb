@@ -44,49 +44,18 @@ if (!isset($_GET['page'])) {
 
 <head>
     <meta charset="UTF-8">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/custom.css">
     <title>Panel CMS</title>
 </head>
 
 <body>
-
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mx-auto">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Kostka Rubika - moja pasja</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0" id="navbarContent">
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="CMS.php?page=Home">Home</a></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop_panel.php">Panel sklepu</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <?php
-                        if (isset($_SESSION['login']))
-                            echo '<a class="nav-link" href="CMS.php?page=Wyloguj">Wyloguj</a>';
-                        else
-                            echo '<a class="nav-link" href="CMS.php?page=Zaloguj">Zaloguj</a>';
-
-                        ?>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php
+    include '../navbar.php';
+    ?>
     <div class="container" id="content">
-
-        <div class="cms-window">
             <h2><span>Panel CMS</span></h2>
             <?php
 
@@ -100,7 +69,6 @@ if (!isset($_GET['page'])) {
             ListaPodstron($dblink);
 
             ?>
-        </div>
 
         <?php
         //---------------------------------------//
@@ -122,21 +90,6 @@ if (!isset($_GET['page'])) {
         }
         ?>
     </div>
-
-    <footer>
-        <div class="footer">
-            <table>
-                <tr>
-                    <td>Piotr Kowalski</td>
-                    <td>numer indeksu: 156036</td>
-                </tr>
-                <tr>
-                    <td>Strona wykonana na potrzeby przedmiotu</td>
-                    <td>Programowanie aplikacji WWW</td>
-                </tr>
-            </table>
-        </div>
-    </footer>
 </body>
 
 </html>

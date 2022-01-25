@@ -95,14 +95,7 @@
         </div>
     </section>
 
-    <footer>
-        <div class="footer">
-            <table>
-                <tr><td>Piotr Kowalski</td><td>numer indeksu: 156036</td></tr>
-                <tr><td>Strona wykonana na potrzeby przedmiotu</td><td>Programowanie aplikacji WWW</td></tr>
-            </table>
-        </div>
-    </footer>
+
 </body>
 <script src="../js/onloadfunctionsCMS.js" type="text/javascript"></script>
 </html>

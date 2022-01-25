@@ -36,19 +36,18 @@ if (!isset($_GET['page'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>Kostka Rubika to moje hobby</title>
 
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/custom.css">
+  <link rel="stylesheet" type="text/css" href="/www/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/www/css/custom.css">
 
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/jquery-3.6.0.min.js"></script>
-  <script src="js/timedate.js"></script>
+  <script src="/www/js/bootstrap.bundle.min.js"></script>
+  <script src="/www/js/jquery-3.6.0.min.js"></script>
 
 </head>
 
 <body>
+  <?php include('navbar.php'); ?>
   <div class="container" id="content">
 
-            <?php include('html/navbar.php'); ?>
 
 
     <?php
@@ -75,7 +74,7 @@ if (!isset($_GET['page'])) {
         exit();
         break;
       case 'Zaloguj':
-        include 'admin/login_formin.php';
+        include 'admin/login_form.php';
         break;
       case 'Kontakt':
         include 'admin/contact.php';
