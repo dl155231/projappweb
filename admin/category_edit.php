@@ -14,13 +14,22 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/styles.css">
-    <title>Panel Sklepu</title>
-</head>
-<body style="min-height: 100Vh;">
-    <div class="edit-content">
-        <div class="logowanie edit-form">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Kostka Rubika to moje hobby</title>
+  
+    <link rel="stylesheet" type="text/css" href="/www/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/www/css/custom.css">
+  
+    <script src="/www/js/bootstrap.bundle.min.js"></script>
+    <script src="/www/js/jquery-3.6.0.min.js"></script>
+    <script src="/www/js/custom.js"></script>
+  
+  </head>
+  
+  <body>
+    <?php include('../navbar.php'); ?>
+    <div class="container" id="content">
             <?php
 
 
