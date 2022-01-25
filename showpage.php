@@ -1,5 +1,5 @@
 <?php
-if (!$connection) echo '<b> Przerwane polaczenie</b>';
+if (!$dblink) echo '<b> Przerwane polaczenie</b>';
 function showPage($id)
 {
     $dbhost = 'localhost';

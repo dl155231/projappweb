@@ -129,7 +129,7 @@
                         $status = 0;
                     }
                     $query_create="INSERT INTO page_list (page_title, page_content, status) VALUES ('$title', '$content', $status)";
-                    if($page_info = mysqli_query($connection, $query_create)){
+                    if($page_info = mysqli_query($dblink, $query_create)){
                         echo '
                         <script type="text/javascript">
                             window.alert("Strona została utworzona.")

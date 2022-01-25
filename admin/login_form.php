@@ -1,22 +1,22 @@
 <?php
 
     //-----------------------------//
-    //     7. PLIK FORM_LOG.PHP    //
+    //     7. PLIK login_form.PHP    //
     //-----------------------------//
 
     //--------------------------------------------------------------------//
-    //     7.1. Plik form_log.php - Formularz logowania do panelu CMS     //
+    //     7.1. Plik login_form.php - Formularz logowania do panelu CMS     //
     //--------------------------------------------------------------------//
 
-    // Należy wspomnieć, że pomimo lokalizacji pliku 'form_log.php' w folderze admin, to zawartość
-    // pliku 'form_log.php' jest wyświetlana z pozycji strony '../index.php', dlatego każdy adres przekierowania jest
+    // Należy wspomnieć, że pomimo lokalizacji pliku 'login_form.php' w folderze admin, to zawartość
+    // pliku 'login_form.php' jest wyświetlana z pozycji strony '../index.php', dlatego każdy adres przekierowania jest
     // pobierany z tej właśnie pozycji.
 
     //-----------------------------------------//
     //     7.2. Odpowiednie przekierowanie     //
     //-----------------------------------------//
 
-    // Warunek sprawdza czy istnieje sesja, jeżeli nie, to sesja zostaje rozpoczęta w pliku 'form_log.php'
+    // Warunek sprawdza czy istnieje sesja, jeżeli nie, to sesja zostaje rozpoczęta w pliku 'login_form.php'
     // i użytkownik zostaje przekierowany do strony głównej ze zmienną 'page=zaloguj' co spowoduje wyświetlenie 
     // formularza logowania i zapewnie poprawne działanie systemu oraz przekierowań.
 
@@ -44,11 +44,11 @@
         //     7.3. Formularz logowania     //
         //----------------------------------//
 
-        // Po naciśnięciu przycisku 'Zaloguj', użytkownik zostaje przekierowany do strony admin/zaloguj.php
+        // Po naciśnięciu przycisku 'Zaloguj', użytkownik zostaje przekierowany do strony admin/login.php
 
      -->
     <h1 class ="heading">Panel CMS</h1>
-    <form method="post" name="LoginForm" enctype="multipart/form-data" action="admin/zaloguj.php">
+    <form method="post" name="LoginForm" enctype="multipart/form-data" action="admin/login.php">
         <table>
             <tr><td class="log4_t">[email]</td><td><input type="text" name="login_email" /></td></tr>
             <tr><td class="log4_t">[haslo]</td><td><input type="password" name="login_pass" /></td></tr>

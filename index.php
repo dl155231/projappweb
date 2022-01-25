@@ -47,37 +47,16 @@ if (!isset($_GET['page'])) {
 
 <body>
   <div class="container" id="content">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mx-auto">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Kostka Rubika - moja pasja</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mb-2 mb-lg-0" id="navbarContent">
+
             <?php include('html/navbar.php'); ?>
-            <li class="nav-item">
-              <a class="nav-link" href="?page=Kontakt">Kontakt</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="?page=Sklep">Sklep</a>
-            </li>
-            <li class="nav-item">
-              <span class="nav-link disabled" id="date"></span>
-            </li>
-            <li class="nav-item">
-              <span class="nav-link disabled" id="clock"></span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+
+
     <?php
-    function showPage($strona, $connection)
+    function showPage($strona, $dblink)
     {
 
       $query = "SELECT * FROM page_list WHERE page_title LIKE '$strona' LIMIT 1";
-      $result = mysqli_query($connection, $query);
+      $result = mysqli_query($dblink, $query);
       $row = mysqli_fetch_array($result);
 
       if (empty($row['id'])) {
@@ -96,10 +75,16 @@ if (!isset($_GET['page'])) {
         exit();
         break;
       case 'Zaloguj':
-        include 'admin/form_login.php';
+        include 'admin/login_formin.php';
         break;
       case 'Kontakt':
         include 'admin/contact.php';
+        break;
+      case 'Sklep':
+        include 'shop/shop.php';
+        break;
+      case 'Koszyk':
+        include 'shop/cart.php';
         break;
       case 'cms':
         if (isset($_SESSION['login'])) {
@@ -107,10 +92,10 @@ if (!isset($_GET['page'])) {
           exit();
           break;
         }
-        include 'admin/form_login.php';
+        include 'admin/login_form.php';
         break;
       default:
-        showPage($strona, $connection);
+        showPage($strona, $dblink);
         break;
     }
     ?>
