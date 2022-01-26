@@ -38,7 +38,6 @@ body {
   text-align: right;
 }
 
-
 .btn-custom {
   background-color: #f5f5f5;
   border: 1px solid #f5f5f5;
@@ -50,4 +49,22 @@ body {
   display: inline-block;
   margin: 4px 2px;
   border-radius: 5px;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+li {
+  list-style-type: none;
 }

@@ -46,6 +46,7 @@ if (!isset($_GET['page'])) {
     <meta charset="UTF-8">
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/custom.js"></script>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/custom.css">
     <title>Panel</title>
@@ -58,41 +59,34 @@ if (!isset($_GET['page'])) {
     <div class="container" id="content">
         <div>
             <h2><span>Panel CMS</span></h2>
+
             <?php
 
             echo 'Zalogowano jako użytkownik: ' . $_SESSION['logged_in'];
-            echo '
-                    <form method="post" name="CreateForm" enctype="multipart/form-data" action="page_create.php">
-                        <input class="btn btn-success mt-2" type="submit" name="create" value="Dodaj nową stronę" />
-                    </form>
-                    ';
+            echo '<form method="post" name="CreateForm" enctype="multipart/form-data" action="page_create.php">
+                    <input class="btn btn-success mt-2" type="submit" name="create" value="Dodaj nową stronę" />
+                </form>';
             echo '<h3 style="margin: 20px auto;">Lista dostępnych podstron:</h3>';
+
             SubpageList($dblink);
 
             ?>
+
         </div>
         <div>
             <h2><span>Panel Kategorii</span></h2>
             <?php
 
-            echo '
-                    <form method="post" name="CreateForm" enctype="multipart/form-data" action="category_create.php">
+            echo '<form method="post" name="CreateForm" enctype="multipart/form-data" action="category_create.php">
                     <input class="btn btn-success mt-2" type="submit" name="create" value="Dodaj nową kategorię" />
-                    </form>
-                    ';
+                </form>';
             echo '<h3 style="margin: 20px auto;">Lista dostępnych kategorii głównych i podkategorii:</h3>';
+
             CategoryList($dblink);
 
             ?>
         </div>
         <?php
-        //---------------------------------------//
-        //     2.4. Nawigacja poza panel panel     //
-        //---------------------------------------//
-
-        // Pierwszy warunek zprawdza czy istnieje zmienna page o wartości 'wyloguj', jeżeli tak, to użytkownik zostaje przekierowany
-        // do podstrony wyloguj.php, która odpowiada za zniszczenie zmiennych sesji przypisanych do zalogowanego użytkownika
-        // (wylogowanie z systemu).
 
         $strona = $_GET['page'];
         if ($_GET['page'] == 'Wyloguj') {

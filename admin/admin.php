@@ -9,12 +9,15 @@ include '../cfg.php';
 function SubpageList($dblink)
 {
     if (isset($_SESSION)) {
-
         $query = "SELECT * FROM page_list ORDER BY id ASC LIMIT 100";
         $result = mysqli_query($dblink, $query);
         echo '<div class="page-list">';
         echo '<table>';
-        echo '<tr><th>ID</th><th>Nazwa</th><th>Edycja</th></tr>';
+        echo '<tr>
+                <th>ID</th>
+                <th>Nazwa</th>
+                <th>Edycja</th>
+            </tr>';
 
         while ($row = mysqli_fetch_array($result)) {
             echo '<tr>
@@ -27,13 +30,13 @@ function SubpageList($dblink)
                     </tr>
                     <tr>
                         <td colspan="3"><hr></td>
-                    </tr>
-                ';
+                    </tr>';
         }
         echo '</table>';
         echo '</div>';
     } else echo "Funkcjonalność dostępna wyłącznie po zalogowaniu";
 }
+
 function Login($login, $password, $admin_login, $admin_passwd)
 {
     if ($login and $password) {
@@ -65,17 +68,13 @@ function PageDelete($id, $dblink)
     $query_delete = "DELETE FROM page_list WHERE id=$id_clear LIMIT 1";
 
     if ($delete = mysqli_query($dblink, $query_delete)) {
-        echo '
-                <script type="text/javascript">
-                    window.alert("Usunięto stronę ' . $title . '")
-                </script>
-                ';
+        echo '<script type="text/javascript">
+                window.alert("Usunięto stronę ' . $title . '")
+            </script>';
     } else {
-        echo '
-                <script type="text/javascript">
-                    window.alert("Wystąpił błąd przy próbie usunięcia strony nr ' . $title . '")
-                </script>
-                ';
+        echo '<script type="text/javascript">
+                window.alert("Wystąpił błąd przy próbie usunięcia strony nr ' . $title . '")
+            </script>';
     }
 }
 
@@ -87,38 +86,46 @@ function CategoryList($dblink)
         $resultMother = mysqli_query($dblink, $queryMother) or die(mysqli_error($dblink));
         echo '<div class="page-list">';
         echo '<table>';
-        echo '<tr><th>ID</th><th>Nazwa</th><th>Edycja</th></tr>';
+        echo '<tr>
+                <th>ID</th>
+                <th>Nazwa</th>
+                <th>Edycja</th>
+            </tr>';
 
         while ($rowMother = mysqli_fetch_array($resultMother)) {
-            echo '
-                    <tr>
-                        <td>' . $rowMother['id'] . '</td>
-                        <td>' . $rowMother['name'] . '</td>
-                        <td>
-                            <a class="btn btn-primary" href="panel.php?id_category_edit=' . $rowMother['id'] . '">Edytuj</a>
-                            <a class="btn btn-danger" href="panel.php?id_delete_category=' . $rowMother['id'] . '">Usuń</a>
-                        </td>
-                    </tr>
-                    <tr><td colspan="3"><hr></td></tr>
-                ';
+            echo '<tr>
+                    <td>' . $rowMother['id'] . '</td>
+                    <td>' . $rowMother['name'] . '</td>
+                    <td>
+                        <a class="btn btn-primary" href="panel.php?id_category_edit=' . $rowMother['id'] . '">Edytuj</a>
+                        <a class="btn btn-danger" href="panel.php?id_delete_category=' . $rowMother['id'] . '">Usuń</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3"><hr></td>
+                </tr>';
+
             $mother = $rowMother['name'];
             $querySubCategories = "SELECT * FROM categories WHERE mother='$mother' LIMIT 100";
             $resultSubCategories = mysqli_query($dblink, $querySubCategories);
+
             echo '<tr> <td></td>';
             echo '<td colspan="3">';
             echo '<table>';
+
             while ($rowSubCategories = mysqli_fetch_array($resultSubCategories)) {
-                echo '
-                    <tr>
-                    <td>' . $rowSubCategories['name'] . '
-                    <td>
-                        <a class="btn btn-primary" href="category_edit.php?id_category_edit=' . $rowSubCategories['id'] . '">Edytuj</a>
-                        <a class="btn btn-danger" href="panel.php?id_delete_category=' . $rowSubCategories['id'] . '">Usuń</a>
-                    </td>
+                echo '<tr>
+                        <td>' . $rowSubCategories['name'] . '</td>
+                        <td>
+                            <a class="btn btn-primary" href="category_edit.php?id_category_edit=' . $rowSubCategories['id'] . '">Edytuj</a>
+                            <a class="btn btn-danger" href="panel.php?id_delete_category=' . $rowSubCategories['id'] . '">Usuń</a>
+                        </td>
                     </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                    ';
+                    <tr>
+                        <td colspan="2"><hr></td>
+                    </tr>';
             }
+
             echo '</td>
                 </tr>
             </table>';
@@ -145,8 +152,7 @@ function ProductList($dblink)
             </tr>';
 
         while ($row = mysqli_fetch_array($result)) {
-            echo '
-                    <tr>
+            echo '<tr>
                     <td class="list-id">' . $row['id'] . '</td>
                     <td>' . $row['name'] . '</td><td>' . $row['category'] . '</td>
                     <td>' . $row['price'] . '</td><td>' . $row['amount'] . '</td>
@@ -176,17 +182,13 @@ function CategoryDelete($id, $dblink)
     $query_delete = "DELETE FROM categories WHERE id=$id_clear LIMIT 1";
 
     if ($delete = mysqli_query($dblink, $query_delete)) {
-        echo '
-                <script type="text/javascript">
-                    window.alert("Usunięto kategorię ' . $name . '")
-                </script>
-                ';
+        echo '<script type="text/javascript">
+                window.alert("Usunięto kategorię ' . $name . '")
+            </script>';
     } else {
-        echo '
-                <script type="text/javascript">
-                    window.alert("Wystąpił błąd przy próbie usunięcia kategorii ' . $name . '")
-                </script>
-                ';
+        echo '<script type="text/javascript">
+                window.alert("Wystąpił błąd przy próbie usunięcia kategorii ' . $name . '")
+            </script>';
     }
 }
 
@@ -218,7 +220,7 @@ function ProductDelete($id, $dblink)
     if ($delete = mysqli_query($dblink, $query_delete)) {
         echo '<script type="text/javascript">window.alert("Usunięto produkt ' . $name . '")</script>';
     } else {
-        echo '<script type="text/javascript">window.alert("Wystąpił błąd przy próbie usunięcia kategorii ' . $name . '")</script>';
+        echo '<script type="text/javascript">window.alert("Wystąpił błąd przy próbie usunięcia produktu ' . $name . '")</script>';
     }
 }
 

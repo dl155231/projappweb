@@ -50,15 +50,15 @@ if (!isset($_SESSION['logged_in'])) {
                             <label for="id_new_name">Nazwa produktu:</label>
                         </td>
                         <td>
-                        <input id="id_new_name" type="text" name="new_name" value="nazwa produktu"/>
+                            <input class="form-control" id="id_new_name" type="text" name="new_name" value="Nazwa"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                        <label for="product-categories">Opis produktu:</label> 
+                        <label for="id_category">Kategoria:</label> 
                     </td>    
                     <td>
-                    <select id="product-categories" name="categorylist" form="editform">
+                    <select class="form-select" id="id_category" name="categorylist" form="editform">
                 ';
 
         while ($row_category = mysqli_fetch_array($result_category)) {
@@ -69,21 +69,20 @@ if (!isset($_SESSION['logged_in'])) {
             </td>
         </tr>';
 
-        echo '
-            <tr>
-            <td>
-                <label for="id_new_desc">Opis produktu: </label>
-            </td>
-            <td>
-                <textarea id="id_new_desc" cols="50" rows="10" name="new_desc">Opis</textarea>
-            </td>
+        echo '<tr>
+                <td>
+                    <label for="id_new_desc">Opis produktu: </label>
+                </td>
+                <td>
+                    <textarea class="form-control" id="id_new_desc" cols="50" rows="10" name="new_desc">Opis</textarea>
+                </td>
             </tr>
             <tr>
                 <td>
                     <label for="id_new_price">Cena produktu:</label>
                 </td>
                 <td>
-                    <input id="id_new_price" type="number" name="new_price" step="0.01" value="0" />
+                    <input class="form-control" id="id_new_price" type="number" name="new_price" step="0.01" value="0" />
                 </td>
             </tr>
             <tr>
@@ -91,7 +90,7 @@ if (!isset($_SESSION['logged_in'])) {
                     <label for="id_new_amount">Liczba sztuk:</label> 
                 </td>
                 <td>
-                    <input id="id_new_amount" type="number" name="new_amount" value="1" />
+                    <input class="form-control" id="id_new_amount" type="number" name="new_amount" value="1" />
                 </td>
             </tr>
             <tr>
@@ -99,7 +98,7 @@ if (!isset($_SESSION['logged_in'])) {
                     <label for="id_new_availability">Dostępność:</label>
                 </td>
                 <td>
-                    <input id="id_new_availability" type="checkbox" name="new_availability" checked />
+                    <input class="form-check-input" id="id_new_availability" type="checkbox" name="new_availability" checked />
                 </td>
             </tr>
             <tr>
@@ -110,10 +109,9 @@ if (!isset($_SESSION['logged_in'])) {
                     <input type="submit" name="cancel" value="Anuluj" />
                 </td>
             </tr>';
-        echo '
-                    </table>
-                </form>
-                ';
+
+        echo '  </table>
+            </form>';
 
         if (isset($_POST["confirm"])) {
 
@@ -133,15 +131,12 @@ if (!isset($_SESSION['logged_in'])) {
                      VALUES ('$new_name', '$new_category', '$new_desc', $new_price, $new_amount, $new_availability)";
 
             if ($product_create_query = mysqli_query($dblink, $query_create_product)) {
-
                 unset($_SESSION['id_create_product']);
                 header('Location: product_panel.php');
             } else {
-                echo '
-                        <script type="text/javascript">
-                            window.alert("Wystąpił błąd")
-                        </script>
-                        ';
+                echo '<script type="text/javascript">
+                        window.alert("Wystąpił błąd")
+                    </script>';
             }
         }
         ?>

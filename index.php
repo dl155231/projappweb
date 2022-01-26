@@ -99,6 +99,17 @@ if (!isset($_GET['page'])) {
         break;
     }
     ?>
+    <h2>Wybierz kolor tła strony</h2>
+    <form method="post" style="width: fit-content;" name="background" id="color_changer" onclick="changeBackground()">
+      <input class="btn-custom" type="button" value="żółty" name="yellow">
+      <input class="btn-custom" type="button" value="czarny" name="black">
+      <input class="btn-custom" type="button" value="biały" name="white">
+      <input class="btn-custom" type="button" value="zielony" name="green">
+      <input class="btn-custom" type="button" value="niebieski" name="blue">
+      <input class="btn-custom" type="button" value="pomarańczowy" name="orange">
+      <input class="btn-custom" type="button" value="szary" name="gray">
+      <input class="btn-custom" type="button" value="czerwony" name="red">
+    </form>
     <?php
     $nr_indeksu = 155231;
     $nrGrupy = '3';

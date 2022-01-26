@@ -62,37 +62,69 @@ if (!isset($_SESSION['logged_in'])) {
 
             echo '<form id="editform" method="post" name="CategoryEditForm" enctype="multipart/form-data" action="">
                         <table>    
-                            <tr><td>Nazwa produktu: </td><td><input type="text" name="new_name" value="' . $old_name . '"/></td></tr>
-                            <tr><td>Kategoria produktu: </td>    
-                            <td>
-                            <select id="product-categories" name="categorylist" form="editform">
-                                <option value="' . $old_category . '">' . $old_category . '</option>
-                        ';
+                            <tr>
+                                <td>
+                                    <label for="id_new_name">Nazwa produktu:</label>
+                                </td>
+                                <td>
+                                    <input class="form-control" id="id_new_name" type="text" name="new_name" value="' . $old_name . '"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="id_category">Kategoria:</label>
+                                </td>    
+                                <td>
+                                    <select class="form-select" id="id_category" name="categorylist" form="editform">
+                                        <option value="' . $old_category . '">' . $old_category . '</option>';
 
             while ($row_category = mysqli_fetch_array($result_category)) {
                 echo '<option value="' . $row_category[1] . '">' . $row_category[1] . '</option>';
             }
-            echo '
-                    </select>
+
+            echo '  </select>
                 </td>
             </tr>
-            <tr><td>Opis produktu: </td><td><textarea cols="50" rows="10" name="new_desc">' . $old_desc . '</textarea></tr>
-            <tr><td>Cena: </td><td><input type="number" name="new_price" step="0.01" value="' . $old_price . '"/></td></tr>
-            <tr><td>Ilość sztuk: </td><td><input type="number" name="new_amount" value="' . $old_amount . '"/></td></tr>';
+            <tr>
+                <td>
+                    <label for="id_new_desc">Opis:</label> 
+                </td>
+                <td>
+                    <textarea class="form-control" id="id_new_desc" cols="50" rows="10" name="new_desc">' . $old_desc . '</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_new_price">Cena:</label>
+                </td>
+                <td>
+                    <input class="form-control" id="id_new_price" type="number" name="new_price" step="0.01" value="' . $old_price . '"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_new_amount">Ilość:</label>
+                </td>
+                <td>
+                    <input class="form-control" id="id_new_amount" type="number" name="new_amount" value="' . $old_amount . '"/>
+                </td>
+            </tr>';
 
-            if ($old_amount > 0) {
-                echo '<tr><td>Dostępność</td><td><input type="checkbox" name="new_availible" checked/></td></tr>';
-            } else {
-                echo '<tr><td>Dostępność</td><td><input type="checkbox" name="new_availible"/></td></tr>';
-            }
+            echo '<tr>
+                    <td>
+                        <label for="id_new_availability">Dostępny:</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="id_new_availability" name="new_availability" ' . ($old_amount ? 'checked' : '') . '/>
+                    </td>
+                </tr>';
 
-            echo '
-                    <tr>
+            echo '  <tr>
                         <td>
-                            <input class="btn-custom" type="submit" name="confirm" value="Zatwierdź zmiany"/>
+                            <input class="btn btn-primary" type="submit" name="confirm" value="Zatwierdź zmiany"/>
                         </td>
                         <td>
-                            <input class="btn-custom" type="submit" name="cancel" value="Anuluj"/>
+                            <input class="btn btn-danger" type="submit" name="cancel" value="Anuluj"/>
                         </td>
                     </tr>
                 </table>
@@ -100,11 +132,10 @@ if (!isset($_SESSION['logged_in'])) {
 
             if (isset($_POST["confirm"])) {
 
-                if (isset($_POST["new_availible"])) {
-                    $new_availible = 1;
-                } else {
-                    $new_availible = 0;
-                }
+                if (isset($_POST["new_availability"])) {
+                    $new_availability = 1;
+                } else  $new_availability = 0;
+
 
                 $new_name = $_POST["new_name"];
                 $new_category = $_POST["categorylist"];
@@ -115,17 +146,12 @@ if (!isset($_SESSION['logged_in'])) {
 
                 if ($product_update_query = mysqli_query($dblink, $query_update_product)) {
                     unset($_SESSION['id_product_edit']);
-                } else {
-                    echo '
-                            <script type="text/javascript">
+                } else echo '<script type="text/javascript">
                                 window.alert("Wystąpił błąd")
-                            </script>
-                            ';
-                }
+                            </script>';
             }
-        } else {
-            echo 'Wystąpił błąd podczas pobierania id produktu.';
-        }
+        } else echo 'Wystąpił błąd podczas pobierania id produktu.';
+
         ?>
     </div>
     </div>

@@ -16,8 +16,10 @@
 
     while ($row = mysqli_fetch_array($result)) {
         echo '
-            <div class="product">
-                <div class="column">
+            <div>
+                <div>
+                    <img src="img/obraz'.$row[0].'.jpg"
+
                     <ul>
                         <li><b>Nazwa:</b> ' . $row[1] . '</li>
                         <li><b>Kategoria:</b> ' . $row[2] . '</li>
@@ -26,11 +28,14 @@
                         <li><b>Dostępnych sztuk:</b> ' . $row[5] . '</li>
                     </ul>
                 </div>
-                <form class="column" method="post" name="product_form" enctype="multipart/form-data" action="">
-                    <div class="button-and-amount">
-                        Ilość produktu: <input id="product-number" type="number" name="value" value="1"/>
-                        <input class="product-id" type="hidden" name="product-id" value="' . $row[0] . '"/>
-                        <input class="add-to-cart" type="submit" name="confirm" value="Dodaj do koszyka"/>
+                <form method="post" name="product_form" enctype="multipart/form-data" action="">
+                    <div>
+                        <label for="id_amount">Ilość:</label>
+                        <input class="form-control" style="width: 75px;" id="id_amount" type="number" name="value" value="1"/>
+
+                        
+                        <input class="btn btn-primary" type="submit" name="confirm" value="Dodaj do koszyka"/>
+                        <input type="hidden" name="product-id" value="' . $row[0] . '"/>
                     </div>
                 </form>
             </div>

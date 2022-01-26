@@ -1,5 +1,3 @@
- <script src="/www/js/timedate.js">
- </script>
  <script>
    $(document).ready(() => {
      startClock();

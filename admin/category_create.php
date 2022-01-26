@@ -40,64 +40,67 @@
                 $queryMother="SELECT * FROM categories WHERE mother IS NULL LIMIT 100";
                 $resultMother = mysqli_query($dblink, $queryMother);
 
-                echo '<h4>Okno Tworzenia Kategorii</h4>
-                <table>
-                <form id="createform" method="post" name="EditForm" enctype="multipart/form-data" action="">
-                    <tr><td>Nazwa kategorii: </td><td><input type="text" name="name" value="nazwa kategorii"/></td></tr>
-                    <tr><td>Nadkategoria: </td>
-                    <td>
-                    <select id="mother-categories" name="motherlist" form="createform">
-                        <option value="">Brak</option>
-                ';
+                echo '<h4>Dodaj kategorię</h4>
+                     <table>
+                        <form id="createform" method="post" name="EditForm" enctype="multipart/form-data" action="">
+                            <tr>
+                                <td>Nazwa kategorii: </td>
+                                <td>
+                                    <input class="form-control" type="text" name="name" value="nazwa kategorii"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Nadkategoria:
+                                </td>
+                                <td>
+                                    <select class="form-select" id="mother-categories" name="motherlist" form="createform">
+                                        <option value="">Brak</option>';
                         
                 while($rowMother = mysqli_fetch_array($resultMother)){
-                    echo '
-                        <option value="'.$rowMother[1].'">'.$rowMother[1].'</option>
-                    ';
+                    echo '<option value="'.$rowMother[1].'">'.$rowMother[1].'</option>';
                 }
-                echo '
-                    </select>
-                    </td>
+                echo '      </select>
+                        </td>
                     </tr>
-                    <tr><td><input type="submit" name="confirm" value="Dodaj kategorię do bazy danych"></td>
-                    <td><input type="submit" name="cancel" value="Anuluj"></td></tr>
-                 </form>
-                 </table>
-                ';
+                    <tr>
+                        <td>
+                            <input class="btn btn-primary" type="submit" name="confirm" value="Dodaj kategorię">
+                        </td>
+                        <td>
+                            <input class="btn btn-danger" type="submit" name="cancel" value="Anuluj">
+                        </td>
+                        </tr>
+                    </form>
+                 </table>';
 
                 if(isset($_POST["confirm"])) {
                     $name = $_POST['name'];
                     $mother = $_POST['motherlist'];
 
                     if(!isset($_POST['name'])){
-                        echo '
-                        <script type="text/javascript">
-                            window.alert("Podaj nazwę kategorii")
-                        </script>
-                        ';
+                        echo '<script type="text/javascript">
+                                window.alert("Podaj nazwę kategorii")
+                            </script>';
                     }
                     else {
-                        if($mother==''){
+                        if($mother == ''){
                             $query_create="INSERT INTO categories (name, mother) VALUES ('$name', NULL)";
                         }
                         else{
                             $query_create="INSERT INTO categories (name, mother) VALUES ('$name', '$mother')";                            
                         }
                         if($category_info = mysqli_query($dblink, $query_create)){
-                            echo '
-                            <script type="text/javascript">
-                                window.alert("Kategoria została utworzona.")
-                            </script>
-                            ';
+                            echo '<script type="text/javascript">
+                                    window.alert("Kategoria została utworzona.")
+                                </script>';
                             header('Location: panel.php');
                             exit();
                         }
                         else {
-                            echo '
-                            <script type="text/javascript">
-                                window.alert("Wystąpił błąd")
-                            </script>
-                            ';
+                            echo '<script type="text/javascript">
+                                    window.alert("Wystąpił błąd")
+                                </script>';
                         }
                     }
                 }

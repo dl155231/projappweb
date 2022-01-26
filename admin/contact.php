@@ -1,54 +1,38 @@
-<h2>Kontakt</h2>
+<h1>Kontakt</h1>
 <?php
-if (!isset($_SESSION['logged_in'])) {
-    echo '
-        <form method="post" name="LoginForm" enctype="multipart/form-data" action="">
-                <button id="pass-remind" class="btn btn-primary" type="submit" name="password-remind">test</button>
-        </form>
-        ';
-}
 
-function PokazKontakt()
+
+function ShowContactForm()
 {
-    echo '
-            <form method="post" name="contact-form" enctype="multipart/form-data" action="">
-            <label for="email">
+    echo '<form method="post" name="contact-form" enctype="multipart/form-data" action="">
+
+            <label for="id_email">
                 <h2>Adres e-mail:</h2>
             </label>
-            <input class="form-control" type="email" name="email" /><br />
+            <input class="form-control" id="id_email" type="email" name="email" /><br />
         
-            <label for="subject">
+            <label for="id_subject">
                 <h2>Temat:</h2>
             </label>
-            <input class="form-control" type="text" name="subject" /><br />
+            <input class="form-control" id="id_subject" type="text" name="subject" /><br />
         
-            <label for="message">
+            <label for="id_message">
                 <h2>Wiadomość:</h2>
             </label>
-            <textarea class="form-control" name="message" style="height: 200px; width: 100%;"></textarea>
-            <button class="btn btn-primary" type="submit">Wyślij</button>
+            <textarea class="form-control" id="id_message" name="message" style="height: 200px; width: 100%;"></textarea>
+            
+            <button class="btn btn-primary" type="submit" name="email-submit" >Wyślij</button>
             <button class="btn btn-primary" type="reset">Resetuj</button>
-            </form>
-        ';
+            </form>';
 }
 
-function PrzypomnijHaslo()
+function SendContactEmail($odbiorca)
 {
-    echo '
-        <script type="text/javascript">
-            window.alert("Wiadomość Zawierająca hasło do panelu panel została wysłana na e-mail administratora")
-        </script>
-        ';
-}
-
-function WyslijMailKontakt($odbiorca)
-{
-    if (empty($_POST['temat']) || empty($_POST['tresc']) || empty($_POST['email'])) {
-        echo '[nie wypełniono formularza]';
-        echo PokazKontakt();
+    if (empty($_POST['subject']) || empty($_POST['message']) || empty($_POST['email'])) {
+        echo 'Wszystkie pola formularza są obowiązkowe.';
     } else {
-        $mail['subject'] = $_POST['temat'];
-        $mail['body'] = $_POST['tresc'];
+        $mail['subject'] = $_POST['subject'];
+        $mail['body'] = $_POST['message'];
         $mail['sender'] = $_POST['email'];
         $mail['recipient'] = $odbiorca;
 
@@ -63,13 +47,10 @@ function WyslijMailKontakt($odbiorca)
     }
 }
 
-PokazKontakt();
+ShowContactForm();
 
 if (isset($_POST['email-submit'])) {
-    WyslijMailKontakt('155231@student.uwm.edu.pl');
-}
-if (isset($_POST['password-remind'])) {
-    PrzypomnijHaslo();
+    SendContactEmail('155231@student.uwm.edu.pl');
 }
 
 ?>

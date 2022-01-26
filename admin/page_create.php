@@ -1,27 +1,9 @@
 <?php
-//-----------------------------//
-//     5. PLIK CREATE.PHP     //
-//-----------------------------//
-
-//------------------------------------------------------------------//
-//     5.1. Plik create.php - Tworzenie nowej podstrony w bazie     //
-//------------------------------------------------------------------//
-
-// Rozpoczynamy sesję przeglądarki, dzięki temu możemy korzystać ze zmiennych sesji
-// utworzonych w innych obszarach systemu niezależnie od tego gdzie się aktualnie znajdujemy.
 
 session_start();
 
 include 'admin.php';
 include '../cfg.php';
-
-//-----------------------------------------//
-//     5.2. Odpowiednie przekierowanie     //
-//-----------------------------------------//
-
-// Warunek blokujący dostęp do okna tworzenia nowej strony użytkownikom niezalogowanym: 
-// na przykład kiedy użytkownik postanowi wpisać ręcznie adres strony 'create.php' bez wcześniejszego
-// zalogowania się to warunek przekieruje użytkownika do formularza logowania.
 
 if (!isset($_SESSION['logged_in'])) {
     header('Location: ../index.php?page=zaloguj');
@@ -56,7 +38,7 @@ if (!isset($_SESSION['logged_in'])) {
             exit();
         }
 
-        echo '<h1>Okno Tworzenia Strony</h1><br/>
+        echo '<h1>Dodaj stronę</h1><br/>
                 <table>
                 <form method="post" name="EditForm" enctype="multipart/form-data" action="">
                     <tr>
@@ -72,7 +54,7 @@ if (!isset($_SESSION['logged_in'])) {
                             <label for="id_content">Treść:</label>
                         </td>
                         <td>
-                            <textarea id="id_content" cols="100" rows="25" name="content"></textarea>
+                            <textarea class="form-control" id="id_content" cols="100" rows="25" name="content"></textarea>
                         </td>
                     </tr
                     <tr>
@@ -80,20 +62,19 @@ if (!isset($_SESSION['logged_in'])) {
                         <label for="id_status">Aktywuj</label>
                         </td>
                         <td>
-                            <input id="id_status" type="checkbox" name="status">
+                            <input class="form-check-input" id="id_status" type="checkbox" name="status">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input class="btn-custom" type="submit" name="confirm" value="Dodaj stronę">
+                            <input class="btn btn-primary" type="submit" name="confirm" value="Dodaj stronę">
                         </td>
                         <td>
-                            <input class="btn-custom" type="submit" name="cancel" value="Anuluj">
+                            <input class="btn btn-danger" type="submit" name="cancel" value="Anuluj">
                         </td>
                     </tr>
                  </form>
-                 </table>
-                ';
+                 </table>';
 
         if (isset($_POST["confirm"])) {
             $content = $_POST['content'];
@@ -106,18 +87,15 @@ if (!isset($_SESSION['logged_in'])) {
             }
             $query_create = "INSERT INTO page_list (page_title, page_content, status) VALUES ('$title', '$content', $status)";
             if ($page_info = mysqli_query($dblink, $query_create)) {
-                echo '
-                        <script type="text/javascript">
-                            window.alert("Strona została utworzona.")
-                        </script>
-                        ';
+                echo '<script type="text/javascript">
+                        window.alert("Strona została utworzona.")
+                    </script>';
                 header('Location: panel.php');
                 exit();
             } else {
                 echo '<script type="text/javascript">
                         window.alert("Wystąpił błąd")
-                    </script>
-                ';
+                    </script>';
             }
         }
         ?>

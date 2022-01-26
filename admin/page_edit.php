@@ -47,21 +47,46 @@
                     $page_info = mysqli_fetch_array($page_info);
                     $old_title = $page_info[1];
 
-                    echo '<h4>Okno edycji strony: '.$old_title.'</h4>';
+                    echo '<h1>Edycja strony: '.$old_title.'</h1>';
 
                     $old_content = $page_info[2];
 
-                    echo '
-                    <form method="post" name="EditForm" enctype="multipart/form-data" action="">
-                        <table>    
-                            <tr><td>Tytuł: </td><td><input type="text" name="new_title" value="'.$old_title.'"/></td></tr>
-                            <tr><td>Treść: </td><td><textarea cols="100" rows="30" name="new_content">'.$old_content.'</textarea></td></tr
-                            <tr><td>Czy aktywna? </td><td><input type="checkbox" name="status"/></td></tr>
-                            <tr><td><input type="submit" name="confirm" value="Zatwierdź zmiany"/></td>
-                            <td><input type="submit" name="cancel" value="Anuluj"/></td></tr>
+                    echo '<form method="post" name="EditForm" enctype="multipart/form-data" action="">
+                            <table>    
+                                <tr>
+                                    <td>
+                                        <label for="id_new_title">Tytuł strony:</label>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" id="id_new_title" type="text" name="new_title" value="'.$old_title.'"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="id_new_content">Treść strony:</label>
+                                    </td>
+                                    <td>
+                                        <textarea class="form-control" id="id_new_content" cols="100" rows="30" name="new_content">'.$old_content.'</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="id_new_status">Aktywuj stronę:</label>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" id="id_new_status" type="checkbox" name="status"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input class="btn btn-primary" type="submit" name="confirm" value="Zatwierdź zmiany"/>
+                                    </td>
+                                    <td>
+                                        <input class="btn btn-danger" type="submit" name="cancel" value="Anuluj"/>
+                                    </td>
+                                </tr>
                         </table>
-                     </form>
-                    ';
+                     </form>';
 
                     if(isset($_POST["confirm"])){
 
@@ -77,26 +102,20 @@
                         $query_update="UPDATE page_list SET page_title='$new_title', page_content='$new_content', status=$status WHERE id=$id LIMIT 1";
                         $result_update = mysqli_query($dblink, $query_update) or die(mysqli_error($dblink));
                         if($page_info = mysqli_query($dblink, $query_update)){
-                            echo '
-                            <script type="text/javascript">
-                                window.alert("Dokonano modyfikacji strony.")
-                            </script>
-                            ';
+                            echo '<script type="text/javascript">
+                                    window.alert("Dokonano modyfikacji strony.")
+                                </script>';
                             unset($_SESSION['id']);
                         }
-                        else {
-                            echo '
-                            <script type="text/javascript">
-                                window.alert("Wystąpił błąd")
-                            </script>
-                            ';
-                        }
+                        else echo '<script type="text/javascript">
+                                       window.alert("Wystąpił błąd")
+                                    </script>';
+                        
 
                     }
                 }
-                else {
-                    echo 'Wystąpił błąd podczas pobierania id strony.';
-                }
+                else echo 'Wystąpił błąd podczas pobierania id strony.';
+                
             ?>
         </div>
     </div>

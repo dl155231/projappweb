@@ -32,13 +32,11 @@
     <div class="container" id="content">
             <?php
 
-
                 if(isset($_POST["cancel"])){
                     unset($_SESSION['id_category_edit']);
                     header('Location: panel.php');
                     exit();
                 }
-
 
                 if($_SESSION['id_category_edit']){
 
@@ -52,32 +50,40 @@
                     $queryMother="SELECT * FROM categories WHERE mother IS NULL LIMIT 100";
                     $resultMother = mysqli_query($dblink, $queryMother);
 
-                    echo '<h4>Okno edycji kategorii: '.$old_name.'</h4>';
-
-                    echo '
-                    <form id="editform" method="post" name="CategoryEditForm" enctype="multipart/form-data" action="">
-                        <table>    
-                            <tr><td>Nazwa kategorii: </td><td><input type="text" name="new_name" value="'.$old_name.'"/></td></tr>
-                            <tr><td>Kategoria matka: </td>    
-                            <td>
-                            <select id="mother-categories" name="motherlist" form="editform">
-                                <option value="">Brak</option>
-                        ';
+                    echo '<h4>Edycja kategorii: '.$old_name.'</h4>';
+                    echo '<form id="editform" method="post" name="CategoryEditForm" enctype="multipart/form-data" action="">
+                                <table>    
+                                    <tr>
+                                        <td>
+                                            <label for="id_new_name">Nazwa kategorii:</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" id="id_new_name" type="text" name="new_name" value="'.$old_name.'"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="id_new_mother">Nadkategoria:</label>
+                                        </td>    
+                                        <td>
+                                            <select class="form-select" id="new_mother" name="motherlist" form="editform">
+                                                <option value="">Brak</option>';
                                 
                         while($rowMother = mysqli_fetch_array($resultMother)){
-                            echo '
-                                <option value="'.$rowMother[1].'">'.$rowMother[1].'</option>
-                            ';
+                            echo '<option value="'.$rowMother[1].'">'.$rowMother[1].'</option>';
                         }
-                        echo '
-                            </select>
+                        echo '      </select>
                             </td>
                             </tr>
-                            <tr><td><input class="btn btn-custom" type="submit" name="confirm" value="Zatwierdź zmiany"/></td>
-                            <td><input class="btn btn-custom" type="submit" name="cancel" value="Anuluj"/></td></tr>
-                        </table>
-                     </form>
-                    ';
+                            <tr>
+                                <td>
+                                    <input class="btn btn-primary" type="submit" name="confirm" value="Zatwierdź zmiany"/>
+                                </td>
+                                <td>
+                                    <input class="btn btn-danger" type="submit" name="cancel" value="Anuluj"/></td>
+                                </tr>
+                            </table>
+                        </form>';
 
                     if(isset($_POST["confirm"])){
 
@@ -94,29 +100,22 @@
                         $query_update_subcategories="UPDATE categories SET mother='$new_name' WHERE mother='$old_name'";
                         if($category_info_query = mysqli_query($dblink, $query_update)){
                             if($category_info_query2 = mysqli_query($dblink, $query_update_subcategories)){
-                                echo '
-                                <script type="text/javascript">
-                                    window.alert("Dokonano modyfikacji kategorii.")
-                                </script>
-                                ';
+                                echo '<script type="text/javascript">
+                                        window.alert("Dokonano modyfikacji kategorii.")
+                                    </script>';
                                 unset($_SESSION['id_category_edit']);
-                                
                                 header('Location: panel.php');
                             }
                             else {
-                                echo '
-                                <script type="text/javascript">
-                                    window.alert("Wystąpił błąd")
-                                </script>
-                                ';
+                                echo '<script type="text/javascript">
+                                        window.alert("Wystąpił błąd")
+                                    </script>';
                             }
                         }
                         else {
-                            echo '
-                            <script type="text/javascript">
-                                window.alert("Wystąpił błąd")
-                            </script>
-                            ';
+                            echo '<script type="text/javascript">
+                                    window.alert("Wystąpił błąd")
+                                </script>';
                         }
 
                     }
