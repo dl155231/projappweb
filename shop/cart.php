@@ -15,7 +15,7 @@ $result = mysqli_query($dblink, $query);
 
 while ($row = mysqli_fetch_array($result)) {
     echo '<div>
-            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 100 100" height="100px" viewBox="0 0 24 24" width="100px" fill="#000000"><g><rect fill="none" height="100" width="100"/></g><g><g><path d="M20,2H4C3,2,2,2.9,2,4v3.01C2,7.73,2.43,8.35,3,8.7V20c0,1.1,1.1,2,2,2h14c0.9,0,2-0.9,2-2V8.7c0.57-0.35,1-0.97,1-1.69V4 C22,2.9,21,2,20,2z M19,20H5V9h14V20z M20,7H4V4h16V7z"/><rect height="2" width="6" x="9" y="12"/></g></g></svg>
+    <img  src="img/obraz' . $row[0] . '.jpg" style="height: 225px;">
                 <div>
                     <ul>
                         <li><b>Nazwa:</b> ' . $row[1] . '</li>
@@ -26,7 +26,7 @@ while ($row = mysqli_fetch_array($result)) {
                 <form method="post" name="product_form" enctype="multipart/form-data" action="">
                     <div>
                         <label for="product-number">Ilość produktu:</label>
-                        <input id="id_amount" type="number" name="value" value="' . $row[2] . '"/>
+                        <input class="form-control" style="width: 75px;" id="id_amount" type="number" name="value" value="' . $row[2] . '"/>
 
                         <input type="hidden" name="product-id" value="' . $row[0] . '"/>
 
@@ -54,6 +54,7 @@ if (isset($_POST['confirm'])) {
         echo '<script type="text/javascript">
                 window.alert("Koszyk został zaktualizowany.");
             </script>';
+            header('Location: index.php?page=Koszyk');
     } else echo '<script type="text/javascript">
                     window.alert("Wystąpił błąd")
                 </script>';
@@ -85,18 +86,13 @@ if (isset($_POST['clear'])) {
     $query_delete = "DELETE FROM cart";
 
     if ($delete = mysqli_query($dblink, $query_delete)) {
-        echo '
-                <script type="text/javascript">
-                    window.alert("Koszyk został opróżniony")
-                </script>
-                ';
-    } else {
-        echo '
-                <script type="text/javascript">
+        echo '<script type="text/javascript">
+                window.alert("Koszyk został opróżniony")
+            </script>';
+    } else echo '<script type="text/javascript">
                     window.alert("Wystąpił błąd")
-                </script>
-                ';
-    }
+                </script>';
+    
 }
 
 if (isset($_POST['pay'])) {
@@ -112,21 +108,17 @@ if (isset($_POST['pay'])) {
         $new_amount = $old_row[0] - $amount;
         $update_product = "UPDATE products SET amount=$new_amount WHERE id=$id";
         if ($update_query = mysqli_query($dblink, $update_product)) {
-        } else {
-            echo 'Wystąpił błąd.';
-        }
+        } else echo 'Wystąpił błąd.';
+        
     }
     $query_delete = "DELETE FROM cart";
 
     if ($delete = mysqli_query($dblink, $query_delete)) {
-        echo '
-                <script type="text/javascript">
-                    window.alert("Dokonano zakupu")
-                </script>
-                ';
-    } else {
-        echo 'Wystąpił błąd2';
-    }
+        echo '<script type="text/javascript">
+                window.alert("Dokonano zakupu")
+            </script>';
+    } else echo 'Wystąpił błąd rzy płatności.';
+    
 }
 
 if (isset($_POST['remove'])) {
@@ -139,12 +131,9 @@ if (isset($_POST['remove'])) {
                     window.alert("Produkt został usunięty z koszyka")
                 </script>
                 ';
-    } else {
-        echo '
-                <script type="text/javascript">
+    } else echo '<script type="text/javascript">
                     window.alert("Wystąpił błąd")
-                </script>
-                ';
-    }
+                </script>';
+    
 }
 ?>

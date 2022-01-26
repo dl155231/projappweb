@@ -132,7 +132,6 @@ if (!isset($_SESSION['logged_in'])) {
 
             if ($product_create_query = mysqli_query($dblink, $query_create_product)) {
                 unset($_SESSION['id_create_product']);
-                header('Location: product_panel.php');
             } else {
                 echo '<script type="text/javascript">
                         window.alert("Wystąpił błąd")

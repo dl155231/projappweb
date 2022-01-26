@@ -6,7 +6,7 @@ include 'admin.php';
 include '../cfg.php';
 
 if (!isset($_SESSION['logged_in'])) {
-    header('Location: ../index.php?idp=zaloguj');
+    echo 'Dostęp zabroniony';
     exit();
 }
 
